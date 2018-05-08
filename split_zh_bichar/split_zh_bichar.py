@@ -83,15 +83,15 @@ class Bichar(object):
 
 if __name__ == "__main__":
     print("split chinese bichar feature")
-    input = "./Data/giga_small.txt"
-    output = "./Data/giga_small_out.txt"
-    Bichar(in_file=input, out_file=output)
+    # input = "./Data/giga_small.txt"
+    # output = "./Data/giga_small_out.txt"
+    # Bichar(in_file=input, out_file=output)
 
-    # parser = OptionParser()
-    # parser.add_option("--input", dest="input", help="input file")
-    # parser.add_option("--output", dest="output", help="output file")
-    # (options, args) = parser.parse_args()
-    # Bichar(in_file=options.input, out_file=options.output)
+    parser = OptionParser()
+    parser.add_option("--input", dest="input", help="input file")
+    parser.add_option("--output", dest="output", help="output file")
+    (options, args) = parser.parse_args()
+    Bichar(in_file=options.input, out_file=options.output)
 
 
 
