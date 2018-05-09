@@ -29,6 +29,8 @@ def split_zh_char(dict=None, count_line=None, out_file=None):
         sys.stdout.write("\rhandling with the {} line, all {} lines.".format(now_line, count_line))
         new_line = ""
         for char in line:
+            if is_chinese(char) is False:
+                continue
             char += " "
             new_line += char
         split_list.append(new_line[:-1])
@@ -49,6 +51,14 @@ def read(input_file=None):
             line_list.append(line)
     print("Read Finished, all {} lines.".format(count_line))
     return line_list, count_line
+
+
+def is_chinese(uchar):
+    """判断一个unicode是否是汉字"""
+    if (uchar >= u'\u4e00') and (uchar <= u'\u9fa5'):
+        return True
+    else:
+        return False
 
 
 def write(dict=None, out_file=None):

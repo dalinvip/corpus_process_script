@@ -65,10 +65,19 @@ class Bichar(object):
         else:
             return False
 
+    def remove_en(self, list):
+        re_list = []
+        for char in list:
+            if self.is_chinese(char) is False:
+                continue
+            re_list.append(char)
+        return re_list
+
     def split_bichar(self, line_list):
         print("split bichar feature......")
         for line in line_list:
             line = list(line)
+            line = self.remove_en(line)
             if len(line) == 0:
                 continue
             line.insert(0, self.pad)
