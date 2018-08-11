@@ -7,6 +7,25 @@
 """
     FILE :  convert_tag.py
     BIO2BMESO : BIO ---> BMESO
+        0	I	B-ARG1
+        1	just	B-ARGM-TMP
+        2	got	B-V-*
+        3	back	B-ARGM-DIR
+        4	from	I-ARGM-DIR
+        5	the	I-ARGM-DIR
+        6	gym	I-ARGM-DIR
+        7	.	O
+
+        ---->
+        0	I	S-ARG1
+        1	just	S-ARGM-TMP
+        2	got	S-V-*
+        3	back	B-ARGM-DIR
+        4	from	M-ARGM-DIR
+        5	the	M-ARGM-DIR
+        6	gym	E-ARGM-DIR
+        7	.	O
+
     文件的末尾必须有两个空行
     run: python -u convert_tag.py --input in.txt --output out.txt
 """
