@@ -12,6 +12,7 @@
 4. [抽取双字特征](https://github.com/bamtercelboo/corpus_process_script/tree/master/split_zh_bichar)
 5. [抽取汉字笔画信息](https://github.com/bamtercelboo/corpus_process_script/tree/master/extract_zh_char_stoke)
 6. [去除非中文字符](https://github.com/bamtercelboo/corpus_process_script/tree/master/clean)
+7. [中文Money转换数字Money](https://github.com/bamtercelboo/corpus_process_script/tree/master/cn_to_arabic)
 
 
 ## Question ##
