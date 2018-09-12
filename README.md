@@ -14,6 +14,7 @@
 6. [去除非中文字符](https://github.com/bamtercelboo/corpus_process_script/tree/master/clean)
 7. [中文Money转换数字Money](https://github.com/bamtercelboo/corpus_process_script/tree/master/cn_to_arabic)
 8. [全半角转换](https://github.com/bamtercelboo/corpus_process_script/tree/master/StrQ2B)
+9. [python2代码批量转换python3](https://github.com/bamtercelboo/corpus_process_script/tree/master/python-2to3)
 
 
 ## Question ##
