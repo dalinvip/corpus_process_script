@@ -1,7 +1,7 @@
 # @Author : bamtercelboo
 # @Datetime : 2018/3/27 9:47
 # @File : extract_zh_char_stoke.py
-# @Last Modify Time : 2018/3/27 9:47
+# @Last Modify Time : 2019/01/22 19:53
 # @Contact : bamtercelboo@{gmail.com, 163.com}
 
 """
@@ -15,19 +15,29 @@
 """
 
 # from Stoke.character_stoke import Stoke
-from Stoke.character_stoke_handian import Stoke
+from .Stoke.character_stoke_handian import Stoke
 import sys
 import os
 from optparse import OptionParser
 
 
 class Extract_stoke(object):
+    """
+        Extract_stoke
+    """
     def __init__(self, input_file, output_file):
-
+        """
+        :param input_file:
+        :param output_file:
+        """
         input_file = input_file
         output_file_found = output_file + ".Found"
         output_file_found_temp = output_file + ".TempFound"
         output_file_NoFound = output_file + ".NoFound"
+        if os.path.exists(output_file_found):
+            os.remove(output_file_found)
+        if os.path.exists(output_file_NoFound):
+            os.remove(output_file_NoFound)
         if os.path.exists(output_file_found_temp):
             os.remove(output_file_found_temp)
         print(output_file_found_temp)
@@ -37,14 +47,15 @@ class Extract_stoke(object):
         self.stoke_dict = {}
         self.stoke_NoFound_dict = {}
         self.NoFound = "NoFound"
-        self.read_dict(in_file=input_file, all_line=32940205)
+        self.read_dict(in_file=input_file, all_line=-1)
         self.get_char_stoke()
         self.write_stoke(out_file=output_file_found, write_dict=self.stoke_dict)
         self.write_stoke(out_file=output_file_NoFound, write_dict=self.stoke_NoFound_dict)
         # print(self.dict)
         # print(len(self.dict))
 
-    def is_chinese(self, uchar):
+    @staticmethod
+    def is_chinese(uchar):
         """判断一个unicode是否是汉字"""
         if (uchar >= u'\u4e00') and (uchar <= u'\u9fa5'):
             return True
@@ -52,6 +63,11 @@ class Extract_stoke(object):
             return False
 
     def read_dict(self, in_file=None, all_line=None):
+        """
+        :param in_file:
+        :param all_line:
+        :return:
+        """
         line_count = all_line
         if all_line is None:
             line_count = "Unknown"
@@ -73,6 +89,9 @@ class Extract_stoke(object):
         print("\nHandle Finished.")
 
     def get_char_stoke(self):
+        """
+        :return:
+        """
         now_line = 0
         line_count = len(self.dict)
         for char in self.dict:
@@ -88,6 +107,11 @@ class Extract_stoke(object):
         print("\nHandle Finished.")
 
     def write_stoke(self, out_file=None, write_dict=None):
+        """
+        :param out_file:
+        :param write_dict:
+        :return:
+        """
         print("save stoke to {}".format(out_file))
         if os.path.exists(out_file):
             os.remove(out_file)
@@ -95,15 +119,27 @@ class Extract_stoke(object):
         for key, value in write_dict.items():
             # print("key {}, value {}".format(key, str(value)))
             v_str = self.dict_value2str(value)
-            file.write(key + " " + v_str[1:] + "\n")
+            file.write(key + " " + v_str[1:].replace(" ", "") + "\n")
         file.close()
         print("Save Finished.")
 
     def write_word(self, file_word, word, stoke):
+        """
+        :param file_word:
+        :param word:
+        :param stoke:
+        :return:
+        """
         v_str = self.dict_value2str(stoke)
-        file_word.write(word + " " + v_str[1:] + "\n")
+        # print(v_str[1:].replace(" ", ""))
+        file_word.write(word + " " + v_str[1:].replace(" ", "") + "\n")
 
-    def dict_value2str(self, v_list=None):
+    @staticmethod
+    def dict_value2str(v_list=None):
+        """
+        :param v_list:
+        :return:
+        """
         if v_list is None:
             return ""
         if isinstance(v_list, list) is False:
@@ -115,7 +151,7 @@ class Extract_stoke(object):
 
 
 if __name__ == "__main__":
-    print("extract chinese character stoke")
+    print("Extract Chinese Character Stoke Information")
     # input_file = "./Data/giga_small.txt"
     # output_file = "./Data/giga_small_out"
     # Extract_stoke(input_file=input_file, output_file=output_file)

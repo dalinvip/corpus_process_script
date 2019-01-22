@@ -1,7 +1,7 @@
 # @Author : bamtercelboo
 # @Datetime : 2018/3/27 9:50
 # @File : stoke.py
-# @Last Modify Time : 2018/3/27 9:50
+# @Last Modify Time : 2019/01/22 19:56
 # @Contact : bamtercelboo@{gmail.com, 163.com}
 
 """
@@ -42,6 +42,9 @@ class Stoke(object):
         self.handian = Handian()
 
     def read_dictionary(self):
+        """
+        :return:
+        """
         self.dictionary = {}
         with open(self.dictionary_filepath, encoding="UTF-8") as f:
             for line in f:
@@ -52,6 +55,10 @@ class Stoke(object):
         # print(self.dictionary)
 
     def get_stoke(self, word):
+        """
+        :param word:
+        :return:
+        """
         if word in self.dictionary:
             return self.dictionary[word]
         else:
@@ -63,6 +70,10 @@ class Stoke(object):
             return self.get_stoke_from_handian(word_utf)
 
     def get_stoke_from_handian(self, word):
+        """
+        :param word:
+        :return:
+        """
         url = self.handian_url
         print("url", url)
         if url == "http://www.zdic.net/sousuo/":
@@ -78,7 +89,12 @@ class Stoke(object):
         # print("char_stoke {}".format(char_stoke))
         return char_stoke
 
-    def anlysis_stoke_from_html(self, html_doc):
+    @staticmethod
+    def anlysis_stoke_from_html(html_doc):
+        """
+        :param html_doc:
+        :return:
+        """
         soup = BeautifulSoup(html_doc, 'html.parser')
         zh_stoke = soup.find(id="z_i_t2_bis")
         zh_stoke = zh_stoke.contents
@@ -88,6 +104,10 @@ class Stoke(object):
         return zh_stoke_list
 
     def post_baidu(self, url):
+        """
+        :param url:
+        :return:
+        """
         try:
             timeout = 10
             # request = urllib2.Request(url)
